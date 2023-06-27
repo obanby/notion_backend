@@ -16,17 +16,13 @@ func (i InMemoryDocumentRpeo) GetDocumentById(id string) (*documents.Document, e
 	return nil, fmt.Errorf("document with id %v doesn't exist", id)
 }
 
-func (i InMemoryDocumentRpeo) SaveDocument(parentId string, doc *documents.Document) error {
-	parentDoc := i.inodeTable[parentId]
-	parentDoc.Documents = append(parentDoc.Documents, doc.Id)
+func (i InMemoryDocumentRpeo) SaveDocument(doc *documents.Document) error {
 	i.inodeTable[string(doc.Id)] = doc
 	return nil
 }
 
 func NewInMemoryDocumentRepo() documents.DocumentRepository {
 	return &InMemoryDocumentRpeo{
-		inodeTable: map[string]*documents.Document{
-			"root": &documents.Document{Id: "root", Name: "", Documents: nil},
-		},
+		inodeTable: map[string]*documents.Document{},
 	}
 }
