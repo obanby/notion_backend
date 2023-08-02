@@ -8,6 +8,7 @@ type Document struct {
 	Id        ID
 	Name      string
 	Documents []ID // TODO: change to linked list
+	//Segments []Segment
 }
 
 type Option func(document *Document) error
